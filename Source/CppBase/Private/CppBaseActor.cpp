@@ -19,7 +19,7 @@ void ACppBaseActor::BeginPlay()
 {
 	Super::BeginPlay();
 	//ShowInformation();
-	
+	InitialLocation = GetActorLocation();
 
 }
 
@@ -27,7 +27,17 @@ void ACppBaseActor::BeginPlay()
 void ACppBaseActor::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	SinMovement();
+}
 
+void ACppBaseActor::SinMovement() 
+{
+	if (!InitialLocation.IsZero())
+	{
+		float Time = GetWorld()->GetTimeSeconds();
+		float NewZ = InitialLocation.Z + Amplitude * FMath::Sin(Frequency * Time);
+		SetActorLocation(FVector(InitialLocation.X, InitialLocation.Y, NewZ));
+	}
 }
 
 void ACppBaseActor::ShowInformation()

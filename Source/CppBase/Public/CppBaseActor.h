@@ -56,7 +56,14 @@ protected:
 	UPROPERTY(EditInstanceOnly)
 
 	bool IsAlive = true;
-	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
+	float Amplitude = 100.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
+	float Frequency = 1.0f;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Movement")
+	FVector InitialLocation;
 	
 public:	
 	UPROPERTY(VisibleAnywhere)
@@ -65,6 +72,9 @@ public:
 	void ShowInformation();
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+	UFUNCTION(BlueprintCallable, Category = "Movement")
+	void SinMovement();
 
 private:
 	
